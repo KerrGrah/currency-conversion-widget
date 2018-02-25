@@ -46,14 +46,14 @@ const Container = styled.div`
   font-weight: 300;
   width: 200px;
   top: 30px;
-  right: 48%;
+  right: 46%;
   padding-top: 20px;
   display: inline;
   @media (max-width: 490px) {
     left: -8%;
   }
   @media (max-width: 320px) {
-    left: -18%;
+    left: -12%;
   }
 `;
 const Selected = styled.div`

@@ -16,7 +16,8 @@ const convertAllRates = data => {
   const keys = Object.keys(data);
   const allRates = {
     EUR: {
-      ...data
+      ...data,
+      EUR: 1
     }
   };
 

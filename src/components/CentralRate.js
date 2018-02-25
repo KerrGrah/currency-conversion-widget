@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 export default props => <Container>{toString(props)}</Container>;
@@ -6,10 +6,10 @@ export default props => <Container>{toString(props)}</Container>;
 const Container = styled.div`
   position: absolute;
   left: 50%;
-  margin-left: -40px;
+  margin-left: -50px;
   top: 187px;
-  min-width: 40px;
   padding: 4px 10px;
+  font-weight: 300;
   border-radius: 6px;
   background: #fff;
   z-index: 1;

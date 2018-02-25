@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-//import { numberWithCommas, validate } from "../util";
 
 export default class Comp extends Component {
   render() {
     return (
       <Input
         type="number"
-        lang="ru"
         value={this.props.value}
         placeholder="0"
         onChange={e => this.props.handleChange(e.target.value)}

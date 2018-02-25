@@ -43,21 +43,28 @@ const Container = styled.div`
   position: absolute;
   text-align: center;
   max-height: 300px;
+  font-weight: 300;
   width: 200px;
   top: 30px;
-  right: 140px;
+  right: 48%;
   padding-top: 20px;
   display: inline;
+  @media (max-width: 490px) {
+    left: -8%;
+  }
+  @media (max-width: 320px) {
+    left: -18%;
+  }
 `;
 const Selected = styled.div`
-  max-height: ${({ visible }) => (visible ? "40px" : "0")};
+  opacity: ${({ visible }) => (visible ? "1" : "0")};
   padding: 6px 6px 0 6px;
   text-align: center;
   font-size: 18px;
   margin: 0 auto;
   overflow: hidden;
   cursor: pointer;
-  transition: max-height 1000ms ease;
+  transition: all 350ms ease 300ms;
 `;
 
 const Dropdown = styled.div`
@@ -65,9 +72,9 @@ const Dropdown = styled.div`
   display: inline-block;
   max-height: ${({ visible }) => (visible ? "100px" : "0")};
   opacity: ${({ visible }) => (visible ? "1" : "0")};
-  transition: all 400ms ease;
+  transition: all 400ms ease-in-out;
   ${({ visible }) => (!visible ? "overflow: hidden" : "")};
-  bottom: 25px;
+  bottom: 45px;
   z-index: 999;
 `;
 const Option = styled.div`

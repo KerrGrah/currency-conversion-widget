@@ -4,14 +4,15 @@ const round = val => Number(val.toFixed(2));
 
 export default function state(
   state = {
-    currencies: ["EUR", "USD", "GBP", "CAD"],
+    currencies: ["EUR", "USD", "GBP"],
     valueOne: "",
     valueTwo: "",
     selectedOne: "USD",
     selectedTwo: "EUR",
     rates: [],
     fetching: false,
-    fetched: false
+    fetched: false,
+    error: false
   },
   action
 ) {
@@ -20,36 +21,40 @@ export default function state(
       return {
         ...state,
         valueOne: action.value,
-        valueTwo: round(
-          action.value * state.rates[state.selectedOne][state.selectedTwo]
-        )
+        valueTwo:
+          round(
+            action.value * state.rates[state.selectedOne][state.selectedTwo]
+          ) || 0
       };
     }
     case actions.INPUT_CHANGE_TWO: {
       return {
         ...state,
         valueTwo: action.value,
-        valueOne: round(
-          action.value * state.rates[state.selectedTwo][state.selectedOne]
-        )
+        valueOne:
+          round(
+            action.value * state.rates[state.selectedTwo][state.selectedOne]
+          ) || 0
       };
     }
     case actions.CURRENCY_SELECT_ONE: {
       return {
         ...state,
         selectedOne: action.value,
-        valueTwo: round(
-          state.valueOne * state.rates[action.value][state.selectedTwo]
-        )
+        valueTwo:
+          round(
+            state.valueOne * state.rates[action.value][state.selectedTwo]
+          ) || 0
       };
     }
     case actions.CURRENCY_SELECT_TWO: {
       return {
         ...state,
         selectedTwo: action.value,
-        valueOne: round(
-          state.valueTwo * state.rates[action.value][state.selectedOne]
-        )
+        valueOne:
+          round(
+            state.valueTwo * state.rates[action.value][state.selectedOne]
+          ) || 0
       };
     }
     case actions.SWITCH_SELECTED: {
@@ -80,7 +85,7 @@ export default function state(
     case actions.GET_RATES_FAILED: {
       return {
         ...state,
-        rates: action.rates,
+        error: true,
         fetching: false,
         fetched: false
       };

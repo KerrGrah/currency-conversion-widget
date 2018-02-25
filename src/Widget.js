@@ -27,6 +27,16 @@ class Widget extends Component {
     this.props.dispatch(action(val, rate));
   };
   render() {
+    if (this.props.error) {
+      return (
+        <Error>
+          Something's gone wrong...
+          <br />
+          <br />
+          Please reload the page or try again later
+        </Error>
+      );
+    }
     if (!this.props.data[this.props.selectedOne]) {
       return <Spinner />;
     }
@@ -84,6 +94,13 @@ const Container = styled.div`
     width: 98%;
   }
 `;
+const Error = styled.p`
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 40vh;
+  font-weight: 300;
+  color: #fff;
+`;
 
 const mapStateToProps = store => {
   return {
@@ -92,7 +109,8 @@ const mapStateToProps = store => {
     valueTwo: store.state.valueTwo,
     selectedOne: store.state.selectedOne,
     selectedTwo: store.state.selectedTwo,
-    currencies: store.state.currencies
+    currencies: store.state.currencies,
+    error: store.state.error
   };
 };
 

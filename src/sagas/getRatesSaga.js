@@ -1,19 +1,17 @@
-import { call, put, take, all, select } from "redux-saga/effects";
+import { call, put, take, select } from "redux-saga/effects";
 import {
   GET_RATES,
-  GET_RATES_FETCHING,
   GET_RATES_FULFILLED,
   GET_RATES_FAILED,
   getRatesFulfilled
 } from "../actions";
+import { ratesUrl } from "../config";
 
 const getCurrenciesArray = state => state.state.currencies;
 
-const fetchRate = currencies =>
-  fetch(`https://api.fixer.io/latest?symbols=${currencies}`);
+const fetchRate = currencies => fetch(`${ratesUrl}symbols=${currencies}`);
 
 const round = num => Number(num.toFixed(5));
-
 const convertAllRates = data => {
   const keys = Object.keys(data);
   const allRates = {
@@ -50,8 +48,6 @@ const getRates = function*() {
   const response = yield call(fetchRate, currenciesArray);
   if (response.ok) {
     const data = yield response.json();
-    //  console.log(data);
-
     yield put(getRatesFulfilled(convertAllRates(data.rates)));
   } else {
     yield put({ type: GET_RATES_FAILED });

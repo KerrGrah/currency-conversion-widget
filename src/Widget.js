@@ -13,11 +13,12 @@ import {
 import Cell from "./components/Cell";
 import CentralRate from "./components/CentralRate";
 import CentralSwitch from "./components/CentralSwitch";
+import Spinner from "./components/Spinner";
 
 class Widget extends Component {
   componentDidMount() {
     setInterval(() => {
-      // this.props.dispatch(getRates());
+      this.props.dispatch(getRates());
     }, 10000);
     this.props.dispatch(getRates());
   }
@@ -26,8 +27,9 @@ class Widget extends Component {
     this.props.dispatch(action(val, rate));
   };
   render() {
-    console.log(this.props);
-
+    if (!this.props.data[this.props.selectedOne]) {
+      return <Spinner />;
+    }
     return (
       <Container>
         <Cell
@@ -47,11 +49,7 @@ class Widget extends Component {
         <CentralRate
           symbOne={getSymbolFromCurrency(this.props.selectedOne)}
           symbTwo={getSymbolFromCurrency(this.props.selectedTwo)}
-          rate={
-            this.props.data[this.props.selectedOne]
-              ? this.props.data[this.props.selectedOne][this.props.selectedTwo]
-              : ""
-          }
+          rate={this.props.data[this.props.selectedOne][this.props.selectedTwo]}
         />
         <Cell
           placement="bottom"
@@ -68,7 +66,7 @@ class Widget extends Component {
     );
   }
 }
-// £
+
 const Container = styled.div`
   position: relative;
   margin: 0 auto;
@@ -79,11 +77,11 @@ const Container = styled.div`
   height: 400px;
   border-radius: 4px;
   background: linear-gradient(#c7b9e5, pink);
-  @media (max-width: 600px) {
-    width: 70%;
+  @media (max-width: 490px) {
+    width: 90%;
   }
-  @media (max-width: 370px) {
-    width: 100%;
+  @media (max-width: 340px) {
+    width: 98%;
   }
 `;
 

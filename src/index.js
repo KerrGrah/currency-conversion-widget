@@ -15,7 +15,7 @@ ReactDOM.render(
 registerServiceWorker();
 
 injectGlobal`
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
 html {
   box-sizing: border-box;
 }

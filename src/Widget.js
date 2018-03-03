@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import getSymbolFromCurrency from "currency-symbol-map";
+import { validate } from "./util";
 import {
   getRates,
   inputChangeOne,
@@ -16,6 +17,13 @@ import CentralSwitch from "./components/CentralSwitch";
 import Spinner from "./components/Spinner";
 
 class Widget extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputVal: 0,
+      commaForDecimal: false
+    };
+  }
   componentDidMount() {
     setInterval(() => {
       this.props.dispatch(getRates());
@@ -23,11 +31,28 @@ class Widget extends Component {
     this.props.dispatch(getRates());
   }
   handleChange = (val, action, currency) => {
+    val = validate(val) !== false ? validate(val) : this.state.inputVal;
     const rate = this.props.data[currency];
-    this.props.dispatch(action(val, rate));
+    this.setState(() => ({
+      inputVal: val,
+      commaForDecimal: val.includes(",")
+    }));
+    this.props.dispatch(action(val.replace(",", "."), rate));
   };
   render() {
-    if (this.props.error) {
+    const {
+      error,
+      data,
+      selectedOne,
+      selectedTwo,
+      rates,
+      valueOne,
+      valueTwo,
+      currencies,
+      dispatch
+    } = this.props;
+
+    if (error) {
       return (
         <Error>
           Something's gone wrong...
@@ -37,39 +62,39 @@ class Widget extends Component {
         </Error>
       );
     }
-    if (!this.props.data[this.props.selectedOne]) {
+    if (!data[selectedOne]) {
       return <Spinner />;
     }
     return (
       <Container>
         <Cell
           placement="top"
-          rates={this.props.rates}
-          value={this.props.valueOne}
-          currencies={this.props.currencies}
-          selected={this.props.selectedOne}
-          handleSelect={val => this.props.dispatch(currencySelectOne(val))}
+          rates={rates}
+          value={valueOne}
+          currencies={currencies}
+          selected={selectedOne}
+          usingComma={this.state.commaForDecimal}
+          handleSelect={val => dispatch(currencySelectOne(val))}
           handleChange={val =>
-            this.handleChange(val, inputChangeOne, this.props.selectedOne)
+            this.handleChange(val, inputChangeOne, selectedOne)
           }
         />
-        <CentralSwitch
-          switchSelected={() => this.props.dispatch(switchSelected())}
-        />
+        <CentralSwitch switchSelected={() => dispatch(switchSelected())} />
         <CentralRate
-          symbOne={getSymbolFromCurrency(this.props.selectedOne)}
-          symbTwo={getSymbolFromCurrency(this.props.selectedTwo)}
-          rate={this.props.data[this.props.selectedOne][this.props.selectedTwo]}
+          symbOne={getSymbolFromCurrency(selectedOne)}
+          symbTwo={getSymbolFromCurrency(selectedTwo)}
+          rate={data[selectedOne][selectedTwo]}
         />
         <Cell
           placement="bottom"
-          rates={this.props.rates}
-          value={this.props.valueTwo}
-          currencies={this.props.currencies}
-          selected={this.props.selectedTwo}
-          handleSelect={val => this.props.dispatch(currencySelectTwo(val))}
+          rates={rates}
+          value={valueTwo}
+          currencies={currencies}
+          selected={selectedTwo}
+          usingComma={this.state.commaForDecimal}
+          handleSelect={val => dispatch(currencySelectTwo(val))}
           handleChange={val =>
-            this.handleChange(val, inputChangeTwo, this.props.selectedTwo)
+            this.handleChange(val, inputChangeTwo, selectedTwo)
           }
         />
       </Container>

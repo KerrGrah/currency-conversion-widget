@@ -3,12 +3,15 @@ import styled from "styled-components";
 
 export default class Comp extends Component {
   render() {
+    const { usingComma, value, handleChange } = this.props;
+    const val = usingComma ? String(value).replace(".", ",") : value;
+
     return (
       <Input
-        type="number"
-        value={this.props.value}
+        type="text"
+        value={val}
         placeholder="0"
-        onChange={e => this.props.handleChange(e.target.value)}
+        onChange={({ target }) => handleChange(target.value)}
       />
     );
   }

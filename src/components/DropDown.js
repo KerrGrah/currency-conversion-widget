@@ -22,7 +22,7 @@ export default class DropDown extends Component {
         {currency}
       </Option>
     ));
-    //console.log(this.props);
+
     return (
       <Container
         visible={this.state.visible}

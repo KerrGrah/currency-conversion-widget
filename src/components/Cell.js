@@ -6,16 +6,27 @@ import Input from "./Input";
 export default class Cell extends Component {
   render() {
     //console.log(this.props);
+    const {
+      placement,
+      currencies,
+      selected,
+      handleSelect,
+      value,
+      handleChange,
+      usingComma
+    } = this.props;
+
     return (
-      <Container placement={this.props.placement}>
+      <Container placement={placement}>
         <DropDown
-          currencies={this.props.currencies}
-          selected={this.props.selected}
-          handleSelect={this.props.handleSelect}
+          currencies={currencies}
+          selected={selected}
+          handleSelect={handleSelect}
         />
         <Input
-          value={this.props.value}
-          handleChange={this.props.handleChange}
+          value={value}
+          handleChange={handleChange}
+          usingComma={usingComma}
         />
       </Container>
     );

@@ -8,6 +8,7 @@ export default class DropDown extends Component {
       visible: false
     };
   }
+
   handleSelect = (e, currency) => {
     e.stopPropagation();
     this.props.handleSelect.call(null, currency);
@@ -49,6 +50,7 @@ const Container = styled.div`
   right: 46%;
   padding-top: 20px;
   display: inline;
+  z-index: 1;
   @media (max-width: 490px) {
     left: -8%;
   }
@@ -60,11 +62,11 @@ const Selected = styled.div`
   opacity: ${({ visible }) => (visible ? "1" : "0")};
   padding: 6px 6px 0 6px;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   margin: 0 auto;
   overflow: hidden;
   cursor: pointer;
-  transition: all 350ms ease 300ms;
+  transition: all 350ms ease 500ms;
 `;
 
 const Dropdown = styled.div`
@@ -92,9 +94,9 @@ const Option = styled.div`
   transition: all 200ms ease;
   width: 80px;
   padding: 4px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   &:hover {
     transform: scale(1.1);
-    background: rgba(245, 245, 245, 0.8);
+    background: rgba(245, 245, 245, 0.9);
   }
 `;

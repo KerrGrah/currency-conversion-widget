@@ -35,11 +35,11 @@ export default class Swicth extends Component {
 
 const Container = styled.div`
   position: absolute;
-  margin-left: 10%;
+  margin-left: 8%;
   top: 185px;
-  width: 30px;
-  height: 30px;
-  padding: 6px;
+  width: 34px;
+  height: 34px;
+  padding: 7px;
   border-radius: 20px;
   background: #fff;
   cursor: pointer;

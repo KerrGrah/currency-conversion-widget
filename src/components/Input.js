@@ -23,9 +23,9 @@ const Input = styled.input`
   width: 90%;
   border: none;
   border-radius: 4px;
-  padding: 10px;
+  padding: 30px 10px 0 10px;
   text-align: right;
-  font-size: 3em;
+  font-size: 2.3em;
   transition: border 200ms ease;
   &:focus {
     outline: none;
@@ -36,4 +36,5 @@ const Input = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
+  user-select: auto;
 `;

@@ -13,7 +13,14 @@ export {
   inputChangeOne,
   inputChangeTwo
 } from "./inputChange";
-export { currencySelectOne, currencySelectTwo } from "./currencySelect";
-export { CURRENCY_SELECT_ONE, CURRENCY_SELECT_TWO } from "./currencySelect";
+
+export {
+  CURRENCY_SELECT_ONE,
+  CURRENCY_SELECT_TWO,
+  currencySelectOne,
+  currencySelectTwo
+} from "./currencySelect";
+
+export { EXCHANGE, exchange } from "./exchange";
 
 export { SWITCH_SELECTED, switchSelected } from "./switchSelected";

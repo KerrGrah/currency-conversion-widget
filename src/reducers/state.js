@@ -4,6 +4,7 @@ const round = val => Number(val.toFixed(2));
 
 export default function state(
   state = {
+    wallets: { EUR: 590, USD: 10000 },
     currencies: ["EUR", "USD", "GBP"],
     valueOne: "",
     valueTwo: "",
@@ -55,6 +56,21 @@ export default function state(
           round(
             state.valueTwo * state.rates[action.value][state.selectedOne]
           ) || 0
+      };
+    }
+    case actions.EXCHANGE: {
+      const { wallets, selectedOne, selectedTwo, valueOne, valueTwo } = state;
+      return {
+        ...state,
+        wallets: {
+          ...wallets,
+          [selectedOne]: round(wallets[selectedOne] - valueOne),
+          [selectedTwo]: wallets[selectedTwo]
+            ? round(wallets[selectedTwo] + +valueTwo)
+            : +valueTwo
+        },
+        valueOne: 0,
+        valueTwo: 0
       };
     }
     case actions.SWITCH_SELECTED: {

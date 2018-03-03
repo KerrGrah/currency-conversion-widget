@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Widget from "./Widget";
+import Converter from "./Converter";
 import registerServiceWorker from "./registerServiceWorker";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -8,14 +8,14 @@ import { injectGlobal } from "styled-components";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Widget />
+    <Converter />
   </Provider>,
   document.getElementById("root")
 );
 registerServiceWorker();
 
 injectGlobal`
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+@import url('https://fonts.googleapis.com/css?family=Roboto:200,300,400');
 html {
   box-sizing: border-box;
 }

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import DropDown from "./DropDown";
 import Input from "./Input";
+import Wallet from "./Wallet";
 
 export default class Cell extends Component {
   render() {
-    //console.log(this.props);
     const {
       placement,
       currencies,
@@ -13,7 +13,9 @@ export default class Cell extends Component {
       handleSelect,
       value,
       handleChange,
-      usingComma
+      usingComma,
+      wallet = 0,
+      symbol
     } = this.props;
 
     return (
@@ -23,6 +25,7 @@ export default class Cell extends Component {
           selected={selected}
           handleSelect={handleSelect}
         />
+        <Wallet wallet={wallet} symbol={symbol} />
         <Input
           value={value}
           handleChange={handleChange}
@@ -32,6 +35,7 @@ export default class Cell extends Component {
     );
   }
 }
+
 const Container = styled.div`
   background: ${({ placement }) =>
     placement === "bottom"
@@ -43,4 +47,5 @@ const Container = styled.div`
   width: 100%;
   height: 200px;
   text-align: center;
+  user-select: none;
 `;

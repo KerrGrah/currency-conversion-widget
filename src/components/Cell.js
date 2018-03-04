@@ -15,7 +15,9 @@ export default class Cell extends Component {
       handleChange,
       usingComma,
       wallet = 0,
-      symbol
+      symbol,
+      available,
+      colors
     } = this.props;
 
     return (
@@ -24,12 +26,15 @@ export default class Cell extends Component {
           currencies={currencies}
           selected={selected}
           handleSelect={handleSelect}
+          colors={colors}
         />
-        <Wallet wallet={wallet} symbol={symbol} />
+        <Wallet wallet={wallet} symbol={symbol} colors={colors} />
         <Input
           value={value}
           handleChange={handleChange}
           usingComma={usingComma}
+          available={available}
+          colors={colors}
         />
       </Container>
     );

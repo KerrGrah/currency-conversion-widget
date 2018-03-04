@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { validate } from "./util";
+import { colors } from "./styleConstants";
 import {
   getRates,
   inputChangeOne,
@@ -62,7 +63,6 @@ class Widget extends Component {
       currencies,
       dispatch
     } = this.props;
-    console.log(this.props);
 
     const symbOne = getSymbolFromCurrency(selectedOne);
     const symbTwo = getSymbolFromCurrency(selectedTwo);
@@ -81,7 +81,7 @@ class Widget extends Component {
       return <Spinner />;
     }
     return (
-      <Container>
+      <Container colors={colors}>
         <Cell
           placement="top"
           rates={rates}
@@ -91,16 +91,22 @@ class Widget extends Component {
           wallet={wallets[selectedOne]}
           symbol={symbOne}
           usingComma={this.state.commaForDecimal}
+          available={wallets[selectedOne] >= valueOne}
+          colors={colors}
           handleSelect={val => dispatch(currencySelectOne(val))}
           handleChange={val =>
             this.handleChange(val, inputChangeOne, selectedOne)
           }
         />
-        <CentralSwitch switchSelected={() => dispatch(switchSelected())} />
+        <CentralSwitch
+          switchSelected={() => dispatch(switchSelected())}
+          colors={colors}
+        />
         <CentralRate
           symbOne={symbOne}
           symbTwo={symbTwo}
           rate={data[selectedOne][selectedTwo]}
+          colors={colors}
         />
         <Cell
           placement="bottom"
@@ -111,12 +117,14 @@ class Widget extends Component {
           wallet={wallets[selectedTwo]}
           symbol={symbTwo}
           usingComma={this.state.commaForDecimal}
+          colors={colors}
+          available={wallets[selectedOne] >= valueOne}
           handleSelect={val => dispatch(currencySelectTwo(val))}
           handleChange={val =>
             this.handleChange(val, inputChangeTwo, selectedTwo)
           }
         />
-        <ExchangeButton exchange={this.exchange} />
+        <ExchangeButton colors={colors} exchange={this.exchange} />
       </Container>
     );
   }
@@ -131,7 +139,7 @@ const Container = styled.div`
   width: 300px;
   height: 400px;
   border-radius: 4px;
-  background: linear-gradient(#c7b9e5, pink);
+  background: ${({ colors }) => colors.bgGradient};
   @media (max-width: 490px) {
     width: 90%;
   }

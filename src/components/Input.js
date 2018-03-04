@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default class Comp extends Component {
   render() {
-    const { usingComma, value, handleChange } = this.props;
+    const { usingComma, value, handleChange, available, colors } = this.props;
     const val = usingComma ? String(value).replace(".", ",") : value;
 
     return (
@@ -11,6 +11,8 @@ export default class Comp extends Component {
         type="text"
         value={val}
         placeholder="0"
+        available={available}
+        colors={colors}
         onChange={({ target }) => handleChange(target.value)}
       />
     );
@@ -26,10 +28,14 @@ const Input = styled.input`
   padding: 30px 10px 0 10px;
   text-align: right;
   font-size: 2.3em;
-  transition: border 200ms ease;
+  background: ${({ colors }) => colors.bgLight};
+  color: ${({ colors }) => colors.fontDark};
+  box-shadow: inset 0 0 10px ${({ colors }) => colors.shadow};
+  transition: all 500ms ease;
   &:focus {
     outline: none;
-    box-shadow: inset 0 0 10px #888;
+    box-shadow: inset 0 0 10px
+      ${({ available, colors }) => (available ? colors.success : colors.danger)};
   }
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {

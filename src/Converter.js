@@ -18,21 +18,25 @@ import CentralRate from "./components/CentralRate";
 import CentralSwitch from "./components/CentralSwitch";
 import Spinner from "./components/Spinner";
 import ExchangeButton from "./components/ExchangeButton";
+import Success from "./components/Success";
 
 class Widget extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputVal: "0",
-      commaForDecimal: false
+      commaForDecimal: false,
+      animateSuccess: false
     };
   }
+
   componentDidMount() {
     setInterval(() => {
       this.props.dispatch(getRates());
     }, 10000);
     this.props.dispatch(getRates());
   }
+
   handleChange = (val, action, currency) => {
     val = validate(val) !== false ? validate(val) : this.state.inputVal;
     const rate = this.props.data[currency];
@@ -42,14 +46,29 @@ class Widget extends Component {
     }));
     this.props.dispatch(action(val.replace(",", "."), rate));
   };
+
   exchange = () => {
     if (
       this.props.wallets[this.props.selectedOne] >= +this.props.valueOne &&
-      this.props.selectedOne !== this.props.selectedTwo
+      this.props.selectedOne !== this.props.selectedTwo &&
+      +this.props.valueOne > 0
     ) {
       this.props.dispatch(exchange());
+      this.animateSuccess();
     }
   };
+
+  animateSuccess = () => {
+    this.setState(() => ({
+      animateSuccess: true
+    }));
+    setTimeout(() => {
+      this.setState(() => ({
+        animateSuccess: false
+      }));
+    }, 1090);
+  };
+
   render() {
     const {
       wallets,
@@ -77,9 +96,11 @@ class Widget extends Component {
         </Error>
       );
     }
+
     if (!data[selectedOne]) {
       return <Spinner />;
     }
+
     return (
       <Container colors={colors}>
         <Cell
@@ -125,6 +146,7 @@ class Widget extends Component {
           }
         />
         <ExchangeButton colors={colors} exchange={this.exchange} />
+        {this.state.animateSuccess && <Success color={colors.success} />}
       </Container>
     );
   }

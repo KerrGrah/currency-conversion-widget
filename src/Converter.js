@@ -156,12 +156,15 @@ const Container = styled.div`
   position: relative;
   margin: 0 auto;
   padding: 0;
-  margin-top: 160px;
+  margin-top: 16vh;
   box-shadow: 1px 1px 10px #111;
   width: 300px;
   height: 400px;
   border-radius: 4px;
   background: ${({ colors }) => colors.bgGradient};
+  @media (max-width: 690px) {
+    width: 60%;
+  }
   @media (max-width: 490px) {
     width: 90%;
   }

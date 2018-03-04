@@ -14,15 +14,15 @@ const flyUp = keyframes`
         opacity: 0.1;
     }
     30% {
-        transform: translate(-50%, -63vh);
+        transform: translate(-50%, -410px);
         opacity: 0.8;
     }
     90% {
-        transform: translate(-50%, -63vh);
+        transform: translate(-50%, -410px);
         opacity: 0.85;
     }
     100% {
-        transform: translate(-50%, -63vh);
+        transform: translate(-50%, -410px);
         opacity: 0.1;
     }
   }

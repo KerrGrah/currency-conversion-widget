@@ -16,6 +16,7 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
+  -webkit-appearance: none;
   background: ${({ colors }) => colors.buttonPrimary};
   font-size: 18px;
   font-weight: 200;

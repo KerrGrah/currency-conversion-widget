@@ -25,7 +25,7 @@ html {
 body {
     padding: 0;
     margin: 0;
-    background: #444;
+    background: #333;
     font-family: 'Roboto', sans-serif;
     user-select: none;
 }`;

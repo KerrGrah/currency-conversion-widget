@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export default props => (
-  <Container>
+  <Container colors={props.colors}>
     <div>{toString(props)}</div>
   </Container>
 );
@@ -19,8 +19,9 @@ const Container = styled.div`
     padding: 4px 10px;
     font-weight: 300;
     border-radius: 6px;
-    background: #fff;
+    background: ${({ colors }) => colors.bgLight};
     margin-right: 6%;
+    color: ${({ colors }) => colors.fontLight};
   }
 `;
 

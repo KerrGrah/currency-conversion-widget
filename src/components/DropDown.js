@@ -18,8 +18,13 @@ export default class DropDown extends Component {
   };
 
   render() {
+    const colors = this.props.colors;
     const currencies = this.props.currencies.map(currency => (
-      <Option key={currency} onClick={e => this.handleSelect(e, currency)}>
+      <Option
+        key={currency}
+        onClick={e => this.handleSelect(e, currency)}
+        colors={colors}
+      >
         {currency}
       </Option>
     ));
@@ -32,6 +37,7 @@ export default class DropDown extends Component {
         <Selected
           visible={!this.state.visible}
           onClick={() => this.setState(state => ({ visible: !state.visible }))}
+          colors={colors}
         >
           {this.props.selected}
         </Selected>
@@ -59,6 +65,7 @@ const Container = styled.div`
   }
 `;
 const Selected = styled.div`
+  color: ${({ colors }) => colors.fontDark};
   opacity: ${({ visible }) => (visible ? "1" : "0")};
   padding: 6px 6px 0 6px;
   text-align: center;
@@ -80,6 +87,7 @@ const Dropdown = styled.div`
   z-index: 999;
 `;
 const Option = styled.div`
+  color: ${({ colors }) => colors.fontDark};
   &:first-of-type {
     border-radius: 10px 10px 0 0;
     padding-top: 10px;

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { numberWithCommas } from "../util";
-export default ({ wallet, symbol }) => (
-  <Wallet>{`${symbol}${numberWithCommas(wallet)}`}</Wallet>
+export default ({ wallet, symbol, colors }) => (
+  <Wallet colors={colors}>{`${symbol}${numberWithCommas(wallet)}`}</Wallet>
 );
 
 const Wallet = styled.p`
@@ -12,5 +12,5 @@ const Wallet = styled.p`
   right: 0;
   margin-right: auto;
   margin-left: auto;
-  color: #888;
+  color: ${({ colors }) => colors.fontLight};
 `;

@@ -22,12 +22,14 @@ export default class Swicth extends Component {
     );
   };
   render() {
+    const colors = this.props.colors;
     return (
       <Container
+        colors={colors}
         clicked={this.state.clicked}
         onClick={this.handleClick.bind(null, this.props.switchSelected)}
       >
-        {svg("#666")}
+        {svg(colors.fontLight)}
       </Container>
     );
   }
@@ -41,7 +43,7 @@ const Container = styled.div`
   height: 34px;
   padding: 7px;
   border-radius: 20px;
-  background: #fff;
+  background: ${({ colors }) => colors.bgLight};
   cursor: pointer;
   z-index: 1;
   transition: transform 400ms ease-in-out;

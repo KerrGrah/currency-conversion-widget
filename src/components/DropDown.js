@@ -46,6 +46,7 @@ export default class DropDown extends Component {
     );
   }
 }
+
 const Container = styled.div`
   position: absolute;
   text-align: center;
@@ -53,17 +54,15 @@ const Container = styled.div`
   font-weight: 300;
   width: 200px;
   top: 30px;
-  right: 46%;
   padding-top: 20px;
   display: inline;
   z-index: 1;
-  @media (max-width: 490px) {
-    left: -8%;
-  }
-  @media (max-width: 320px) {
-    left: -12%;
+  left: -38px;
+  @media (max-width: 690px) {
+    left: -32px;
   }
 `;
+
 const Selected = styled.div`
   color: ${({ colors }) => colors.fontDark};
   opacity: ${({ visible }) => (visible ? "1" : "0")};
@@ -86,6 +85,7 @@ const Dropdown = styled.div`
   bottom: 45px;
   z-index: 999;
 `;
+
 const Option = styled.div`
   color: ${({ colors }) => colors.fontDark};
   &:first-of-type {
